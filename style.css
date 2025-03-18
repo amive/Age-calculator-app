@@ -67,15 +67,15 @@ input {
   transform: translateX(390px);
 }
 .arrow img {
-  scale: 0.6;
+  scale: 0.4;
   transform: translateX(-5.5%);
   height: 100%;
 }
 .container {
   background-color: white;
   height: 370px;
-  border-radius: 10px;
-  border-bottom-right-radius: 8pc;
+  border-radius: 15px;
+  border-bottom-right-radius: 6pc;
   align-content: center;
   padding-left: 20px;
   padding-top: 25px;
@@ -83,4 +83,38 @@ input {
   transform: translateX(50%);
   position: relative;
   top: 50px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 95vw;
+    transform: translateX(0.5%);
+    zoom: 1.5;
+    padding: 0;
+  }
+  input {
+    font-size: 18px;
+  }
+  .inputs {
+    width: 100%;
+    gap: 10px;
+    align-items: center;
+    scale: 0.9;
+  }
+  .arrow {
+    position: absolute;
+    transform: translateX(200%);
+    top: 120px;
+    scale: 0.8;
+  }
+  .result {
+    padding-top: 25px;
+    padding-left: 10px;
+    font-size: 1.2em;
+  }
+  .separator {
+    width: 90%;
+    transform: translateX(0%);
+    transform: translateY(20px);
+  }
 }
