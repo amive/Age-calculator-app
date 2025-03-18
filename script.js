@@ -1,8 +1,54 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const date = new Date("2025-06-18");
+  const date = new Date();
   const curMonth = date.getMonth() + 1;
   const curDay = date.getDate();
   const curYear = date.getFullYear();
+
+  const dayError = document.getElementById("dayError");
+  const monthError = document.getElementById("monthError");
+  const yearError = document.getElementById("yearError");
+
+  function showError(input, errorElement) {
+    errorElement.style.display = "block"; // Show error message
+    input.closest(".input-group").classList.add("error"); // Apply red styles
+  }
+
+  function hideError(input, errorElement) {
+    errorElement.style.display = "none"; // Hide error message
+    input.closest(".input-group").classList.remove("error"); // Remove red styles
+  }
+
+  function validateDay() {
+    const day = parseInt(document.getElementById("day").value.trim());
+    if (isNaN(day) || day < 1 || day > 31) {
+      showError(document.getElementById("day"), dayError);
+    } else {
+      hideError(document.getElementById("day"), dayError);
+    }
+  }
+
+  function validateMonth() {
+    const inpMonth = parseInt(document.getElementById("month").value.trim());
+    if (isNaN(inpMonth) || inpMonth < 1 || inpMonth > 12) {
+      showError(document.getElementById("month"), monthError);
+    } else {
+      hideError(document.getElementById("month"), monthError);
+    }
+  }
+
+  function validateYear() {
+    const inpYear = parseInt(document.getElementById("year").value.trim());
+    if (inpYear >= curYear || isNaN(inpYear)) {
+      showError(document.getElementById("year"), yearError);
+    } else {
+      hideError(document.getElementById("year"), yearError);
+    }
+  }
+
+  function isLeapYear(year) {
+    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+  }
+
   function calc() {
     const inpDay = parseInt(document.getElementById("day").value);
     const inpMonth = parseInt(document.getElementById("month").value);
@@ -11,16 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let Resday = curDay - inpDay;
     let Resmonth = curMonth - inpMonth;
     let Resyear = curYear - inpYear;
-
-    if (isNaN(inpDay) || isNaN(inpMonth) || isNaN(inpYear)) {
-      alert("Please, Enter a number.");
-      console.log("NaN error");
-      return;
-    }
-    if (inpYear > curYear) {
-      alert("Must be in the past.");
-      return;
-    }
 
     if (
       //31 Days
@@ -34,46 +70,29 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
       if (inpDay > 31 || inpDay <= 0) {
         console.log("Month has 1-31 days");
-        alert("ERROR: Month has 1-31 days.");
         return;
       } else {
         console.log("31 days");
         if (Resday < 0) {
           Resmonth -= 1;
           Resday += 31;
-          document.getElementById("yearRes").textContent = Math.floor(Resyear);
-          document.getElementById("monthRes").textContent =
-            Math.floor(Resmonth);
-          document.getElementById("dayRes").textContent = Math.floor(Resday);
-          return;
-        } else if (Resmonth < curMonth) {
+        } else if (Resmonth < 0) {
           console.log("AAA1");
-          Resmonth += 1;
-          document.getElementById("yearRes").textContent = Math.floor(Resyear);
-          document.getElementById("monthRes").textContent =
-            Math.floor(Resmonth);
-          document.getElementById("dayRes").textContent = Math.floor(Resday);
-          return;
+          Resyear -= 1;
+          Resmonth += 12;
         }
       }
     } else if (inpMonth === 2) {
-      //28 Days.
-      if (inpDay > 28) {
-        console.log("Month has 1-28 days");
-        alert("ERROR: Month has 1-28 days.");
+      //28 or 29 Days.
+      const maxDays = isLeapYear(inpYear) ? 29 : 28;
+      if (inpDay > maxDays) {
+        console.log(`Month has 1-${maxDays} days`);
         return;
       } else {
-        console.log("28 days");
+        console.log(`${maxDays} days`);
         if (Resday < 0) {
           Resmonth -= 1;
-          Resday += 28;
-          document.getElementById("yearRes").textContent = Resyear;
-          document.getElementById("monthRes").textContent = Resmonth;
-          document.getElementById("dayRes").textContent = Resday;
-          return;
-        } else if (Resmonth < curMonth) {
-          console.log("AAA2");
-          Resmonth += 1;
+          Resday += maxDays;
           document.getElementById("yearRes").textContent = Resyear;
           document.getElementById("monthRes").textContent = Resmonth;
           document.getElementById("dayRes").textContent = Resday;
@@ -89,49 +108,32 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
       if (inpDay > 30) {
         console.log("Month has 1-30 days");
-        alert("ERROR: Month has 1-30 days.");
         return;
       } else {
         console.log("30 days");
         if (Resday < 0) {
-          Resmonth += 1;
-          Resday -= 30;
-          document.getElementById("yearRes").textContent = Resyear;
-          document.getElementById("monthRes").textContent = Resmonth;
-          document.getElementById("dayRes").textContent = Resday;
-        } else if (Resmonth < curMonth) {
-          console.log("AAA3");
-          Resmonth += 1;
-          if (Resmonth > 12) {
-            Resmonth -= 12;
-            Resyear += 1;
-            document.getElementById("yearRes").textContent = Resyear;
-            document.getElementById("monthRes").textContent = Resmonth;
-            document.getElementById("dayRes").textContent = Resday;
-            return;
-          }
-          document.getElementById("yearRes").textContent = Resyear;
-          document.getElementById("monthRes").textContent = Resmonth;
-          document.getElementById("dayRes").textContent = Resday;
+          Resmonth -= 1;
+          Resday += 30;
         }
       }
-    }
-
-    if (inpMonth <= 0 || inpMonth > 13 || inpDay <= 0 || inpDay > 31) {
-      alert("Please, Enter a valid (Day/Month).");
-      console.log("Not 1-12 error");
-      return;
-    } else {
-      if (Resmonth < 0 || Resmonth >= -12) {
+      if (Resmonth < 0) {
+        console.log("AAA2");
         Resyear -= 1;
         Resmonth += 12;
-        document.getElementById("yearRes").textContent = Math.floor(Resyear);
-        document.getElementById("monthRes").textContent = Math.floor(Resmonth);
-        document.getElementById("dayRes").textContent = Math.floor(Resday);
-        return;
+      }
+
+      if (Resmonth > 12) {
+        console.log("AAA3");
+        Resmonth -= 12;
+        Resyear += 1;
       }
     }
+    document.getElementById("yearRes").textContent = Resyear;
+    document.getElementById("monthRes").textContent = Resmonth;
+    document.getElementById("dayRes").textContent = Resday;
   }
-
+  day.addEventListener("input", validateDay);
+  month.addEventListener("input", validateMonth);
+  year.addEventListener("input", validateYear);
   document.querySelector(".arrow").addEventListener("click", calc);
 });

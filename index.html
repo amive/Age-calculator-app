@@ -19,16 +19,21 @@
     <div class="container">
       <div class="inputs">
         <div class="input-group">
-          <label for="day">DAY</label>
+          <label for="day" id="dayLabel">DAY</label>
           <input type="text" placeholder="DD" id="day" />
+          <span class="error-message" id="dayError">Must be a valid day</span>
         </div>
         <div class="input-group">
-          <label for="month">MONTH</label>
+          <label for="month" id="monthLabel">MONTH</label>
           <input type="text" placeholder="MM" id="month" />
+          <span class="error-message" id="monthError"
+            >Must be a valid month</span
+          >
         </div>
         <div class="input-group">
-          <label for="year">YEAR</label>
+          <label for="year" id="yearLabel">YEAR</label>
           <input type="text" placeholder="YYYY" id="year" />
+          <span class="error-message" id="yearError">Must be in the past</span>
         </div>
       </div>
 

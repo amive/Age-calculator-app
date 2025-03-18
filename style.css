@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;700;800&display=swap");
 body {
   font-family: "Poppins", sans-serif;
   font-size: 32px;
@@ -32,6 +32,7 @@ input {
   border-radius: 5px;
   border: 1.5px solid hsl(0, 0%, 86%);
   padding: 10px;
+  outline: none;
 }
 
 .result {
@@ -83,6 +84,24 @@ input {
   transform: translateX(50%);
   position: relative;
   top: 50px;
+}
+
+.error-message {
+  color: red;
+  font-size: 9px;
+  font-weight: 300;
+  font-style: italic;
+  margin-top: 5px;
+  display: none; /* Hidden by default */
+}
+
+/* Add a red border and red text when invalid */
+.input-group.error input {
+  border: 1px solid red;
+}
+
+.input-group.error label {
+  color: red;
 }
 
 @media (max-width: 768px) {
