@@ -33,8 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (day > maxDays) {
         showError(document.getElementById("day"), dayError);
       }
-     }
-    if (isNaN(day) || day < 1 || day > 31) {
+     } else if (isNaN(day) || day < 1 || day > 31) {
       showError(document.getElementById("day"), dayError);
     } else {
       hideError(document.getElementById("day"), dayError);
