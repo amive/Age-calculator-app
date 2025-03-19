@@ -76,7 +76,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (Resday < 0) {
           Resmonth -= 1;
           Resday += 31;
-        } else if (Resmonth < 0) {
+        } 
+        if (Resmonth < 0) {
           console.log("AAA1");
           Resyear -= 1;
           Resmonth += 12;
