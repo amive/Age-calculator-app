@@ -20,6 +20,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function validateDay() {
     const day = parseInt(document.getElementById("day").value.trim());
+    const year = parseInt(document.getElementById("year").value.trim());
+    const month = parseInt(document.getElementById("month").value.trim());
+    const maxDays = isLeapYear(year) ? 29 : 28;
+    if (month === 2) {
+      //28 or 29 Days.
+      const maxDays = isLeapYear(inpYear) ? 29 : 28;
+      if (day > maxDays) {
+        showError(document.getElementById("day"), dayError);
+      }
     if (isNaN(day) || day < 1 || day > 31) {
       showError(document.getElementById("day"), dayError);
     } else {
@@ -28,8 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function validateMonth() {
-    const inpMonth = parseInt(document.getElementById("month").value.trim());
-    if (isNaN(inpMonth) || inpMonth < 1 || inpMonth > 12) {
+    const month = parseInt(document.getElementById("month").value.trim());
+    if (isNaN(inpMonth) || month < 1 || month > 12) {
       showError(document.getElementById("month"), monthError);
     } else {
       hideError(document.getElementById("month"), monthError);
@@ -37,8 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function validateYear() {
-    const inpYear = parseInt(document.getElementById("year").value.trim());
-    if (inpYear >= curYear || isNaN(inpYear)) {
+    const year = parseInt(document.getElementById("year").value.trim());
+    if (year >= curYear || isNaN(year)) {
       showError(document.getElementById("year"), yearError);
     } else {
       hideError(document.getElementById("year"), yearError);
