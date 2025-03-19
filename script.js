@@ -17,7 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
     errorElement.style.display = "none"; // Hide error message
     input.closest(".input-group").classList.remove("error"); // Remove red styles
   }
-
+  
+  function isLeapYear(year) {
+    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+  }
+  
   function validateDay() {
     const day = parseInt(document.getElementById("day").value.trim());
     const year = parseInt(document.getElementById("year").value.trim());
@@ -52,10 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       hideError(document.getElementById("year"), yearError);
     }
-  }
-
-  function isLeapYear(year) {
-    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
   }
 
   function calc() {
