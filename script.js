@@ -21,24 +21,32 @@ document.addEventListener("DOMContentLoaded", function () {
   function isLeapYear(year) {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
   }
-  
+
   function validateDay() {
     const day = parseInt(document.getElementById("day").value.trim());
     const year = parseInt(document.getElementById("year").value.trim());
     const month = parseInt(document.getElementById("month").value.trim());
-    const maxDays = isLeapYear(year) ? 29 : 28;
+  
+    if (isNaN(day) || day < 1) {
+      showError(document.getElementById("day"), dayError);
+      return;
+    }
+  
+    let maxDays;
     if (month === 2) {
-      //28 or 29 Days.
-      const maxDays = isLeapYear(inpYear) ? 29 : 28;
-      if (day > maxDays) {
-        showError(document.getElementById("day"), dayError);
-     } else if (isNaN(day) || day < 1 || day > 31) {
+      maxDays = isLeapYear(year) ? 29 : 28;
+    } else if ([4, 6, 9, 11].includes(month)) {
+      maxDays = 30;
+    } else {
+      maxDays = 31;
+    }
+  
+    if (day > maxDays) {
       showError(document.getElementById("day"), dayError);
     } else {
       hideError(document.getElementById("day"), dayError);
     }
   }
-}
 
   function validateMonth() {
     const month = parseInt(document.getElementById("month").value.trim());
