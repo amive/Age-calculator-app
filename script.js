@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function validateMonth() {
     const month = parseInt(document.getElementById("month").value.trim());
-    if (isNaN(inpMonth) || month < 1 || month > 12) {
+    if (isNaN(month) || month < 1 || month > 12) {
       showError(document.getElementById("month"), monthError);
     } else {
       hideError(document.getElementById("month"), monthError);
