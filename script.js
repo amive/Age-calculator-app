@@ -32,13 +32,13 @@ document.addEventListener("DOMContentLoaded", function () {
       const maxDays = isLeapYear(inpYear) ? 29 : 28;
       if (day > maxDays) {
         showError(document.getElementById("day"), dayError);
-      }
      } else if (isNaN(day) || day < 1 || day > 31) {
       showError(document.getElementById("day"), dayError);
     } else {
       hideError(document.getElementById("day"), dayError);
     }
   }
+}
 
   function validateMonth() {
     const month = parseInt(document.getElementById("month").value.trim());
